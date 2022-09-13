@@ -93,6 +93,9 @@ $card-border-color: #f1f2f2;
                     transition: .1s ease-in-out;
                     cursor: pointer;
                   }
+                  .voted {
+                    opacity: 0.25;
+                  }
 
                   .rating {
                     text-align: center;

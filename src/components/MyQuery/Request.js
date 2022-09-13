@@ -20,6 +20,8 @@ import useMyquery from "./useMyquery";
 import { DataLoaded } from "../../App";
 import upVoteImg from "../../Assets/Images/up.png";
 import downVoteImg from "../../Assets/Images/down.png";
+import arrowUp from "../../Assets/Images/arrowUp.png";
+import arrowDown from "../../Assets/Images/arrowDwon.png";
 
 export default function Request() {
 	const { answer, myquery, request, answerLaterUser, FilterData } =
@@ -837,9 +839,10 @@ export default function Request() {
 																						)}
 																					</div>
 																				</div>
-																				<div className="votes">
-																					{allQuestion?.createdBy?._id !==
-																					userData?._id ? (
+																				{!userData.votedQuestions.includes(
+																					allQuestion?._id
+																				) ? (
+																					<div className="votes voted">
 																						<img
 																							src={upVoteImg}
 																							className="vote-icon"
@@ -847,28 +850,42 @@ export default function Request() {
 																								voteQuestion(1, allQuestion);
 																							}}
 																						/>
-																					) : (
-																						<img
-																							style={{ color: "black" }}
-																							src={upVoteImg}
-																							className="vote-icon"
-																						/>
-																					)}
 
-																					<div
-																						className="rating"
-																						id={`rating${allQuestion?._id}`}
-																					>
-																						{allQuestion?.rating}
+																						<div
+																							className="rating"
+																							id={`rating${allQuestion?._id}`}
+																						>
+																							{allQuestion?.rating}
+																						</div>
+
+																						<img
+																							src={downVoteImg}
+																							className="vote-icon"
+																							onClick={() => {
+																								voteQuestion(0, allQuestion);
+																							}}
+																						/>
 																					</div>
-																					<img
-																						src={downVoteImg}
-																						className="vote-icon"
-																						onClick={() => {
-																							voteQuestion(0, allQuestion);
-																						}}
-																					/>
-																				</div>
+																				) : (
+																					<div className="votes">
+																						<img
+																							src={upVoteImg}
+																							className="vote-icon voted"
+																						/>
+
+																						<div
+																							className="rating"
+																							id={`rating${allQuestion?._id}`}
+																						>
+																							{allQuestion?.rating}
+																						</div>
+
+																						<img
+																							src={downVoteImg}
+																							className="vote-icon voted"
+																						/>
+																					</div>
+																				)}
 																			</div>
 																			<div className="profile-grid-items">
 																				{allQuestion?.createdBy
